@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NyumbaTrack — Property management for Kenyan landlords</title>
+<meta name="description" content="Track tenants, rent, deposits and units in one place. Built for Kenyan landlords and their agents." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --green-900:#0d2818;
+    --green-800:#15301f;
+    --green-600:#166534;
+    --amber:#F59E0B;
+    --cream:#F5F5F0;
+    --ink:#0f1d14;
+    --muted:#6B7280;
+    --line:#e6e4dc;
+  }
+  *{margin:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.6;
+  }
+  h1,h2,h3,h4,.disp{font-family:'Plus Jakarta Sans',sans-serif;}
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px;}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:50;background:rgba(245,245,240,.85);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:72px;}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.1rem;}
+  .brand-icon{width:36px;height:36px;border-radius:10px;background:var(--green-900);display:flex;align-items:center;justify-content:center;}
+  .brand-icon svg{width:20px;height:20px;}
+  .nav-links{display:flex;gap:32px;font-size:.95rem;font-weight:500;}
+  .nav-links a{text-decoration:none;color:var(--ink);opacity:.75;transition:opacity .15s;}
+  .nav-links a:hover{opacity:1;}
+  .nav-cta{
+    background:var(--green-600);color:#fff;padding:10px 20px;border-radius:10px;
+    font-weight:600;font-size:.9rem;text-decoration:none;transition:background .15s;
+    white-space:nowrap;
+  }
+  .nav-cta:hover{background:var(--green-900);}
+  @media(max-width:760px){.nav-links{display:none;}}
+
+  /* HERO */
+  .hero{padding:96px 0 80px;position:relative;overflow:hidden;}
+  .hero::before{
+    content:"";position:absolute;top:-180px;right:-180px;width:480px;height:480px;
+    border-radius:50%;background:radial-gradient(circle,rgba(245,158,11,.18),transparent 70%);
+    pointer-events:none;
+  }
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center;}
+  @media(max-width:880px){.hero-grid{grid-template-columns:1fr;gap:48px;}}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);
+    border-radius:999px;padding:6px 14px;font-size:.8rem;font-weight:600;color:var(--green-600);
+    margin-bottom:24px;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--amber);}
+  .hero h1{font-size:3.4rem;font-weight:800;line-height:1.08;letter-spacing:-.02em;margin-bottom:24px;}
+  .hero h1 span{color:var(--green-600);}
+  @media(max-width:880px){.hero h1{font-size:2.4rem;}}
+  .hero p.lead{font-size:1.15rem;color:var(--muted);max-width:480px;margin-bottom:36px;}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--green-600);color:#fff;padding:15px 28px;border-radius:12px;font-weight:700;
+    text-decoration:none;font-size:.98rem;display:inline-flex;align-items:center;gap:8px;
+    transition:transform .15s,background .15s;
+  }
+  .btn-primary:hover{background:var(--green-900);transform:translateY(-1px);}
+  .btn-secondary{
+    background:#fff;color:var(--ink);padding:15px 28px;border-radius:12px;font-weight:700;
+    text-decoration:none;font-size:.98rem;border:1px solid var(--line);
+    display:inline-flex;align-items:center;gap:8px;transition:border-color .15s,transform .15s;
+  }
+  .btn-secondary:hover{border-color:var(--green-600);transform:translateY(-1px);}
+
+  /* PHONE MOCKUP */
+  .phone{
+    background:linear-gradient(160deg,var(--green-900) 0%,#1a3a28 60%,var(--green-600) 100%);
+    border-radius:32px;padding:14px;max-width:300px;margin:0 auto;
+    box-shadow:0 30px 60px -20px rgba(13,40,24,.45);
+    position:relative;
+  }
+  .phone-screen{background:var(--cream);border-radius:22px;overflow:hidden;}
+  .phone-top{background:#fff;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);}
+  .phone-top .pt-left{display:flex;align-items:center;gap:8px;font-weight:700;font-size:.85rem;}
+  .phone-top .pt-left .ic{width:24px;height:24px;border-radius:7px;background:var(--amber);display:flex;align-items:center;justify-content:center;}
+  .phone-top .pt-left .ic svg{width:13px;height:13px;}
+  .bell{width:28px;height:28px;border-radius:50%;background:var(--amber);display:flex;align-items:center;justify-content:center;position:relative;}
+  .bell svg{width:13px;height:13px;}
+  .bell::after{content:"";position:absolute;top:-2px;right:-2px;width:9px;height:9px;border-radius:50%;background:#DC2626;border:2px solid #fff;}
+  .phone-body{padding:16px;}
+  .hero-card{
+    background:linear-gradient(135deg,var(--green-900) 0%,var(--green-600) 100%);
+    border-radius:16px;padding:16px;color:#fff;margin-bottom:14px;position:relative;overflow:hidden;
+  }
+  .hero-card::after{content:"";position:absolute;top:-30px;right:-30px;width:90px;height:90px;border-radius:50%;background:rgba(245,158,11,.18);}
+  .hero-card .lbl{font-size:.65rem;color:rgba(255,255,255,.6);margin-bottom:2px;}
+  .hero-card .name{font-weight:700;font-size:1rem;font-family:'Plus Jakarta Sans',sans-serif;}
+  .hero-card .loc{font-size:.7rem;color:rgba(255,255,255,.55);margin-bottom:10px;}
+  .pills{display:flex;gap:6px;flex-wrap:wrap;position:relative;z-index:1;}
+  .pill{font-size:.65rem;font-weight:700;padding:3px 9px;border-radius:999px;}
+  .pill-amber{background:var(--amber);color:#fff;}
+  .pill-w{background:rgba(255,255,255,.18);color:#fff;}
+  .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;}
+  .stat{background:#fff;border-radius:12px;padding:10px;border:1px solid var(--line);}
+  .stat .stat-ic{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:8px;}
+  .stat .stat-ic svg{width:13px;height:13px;}
+  .stat .lbl{font-size:.62rem;color:var(--muted);margin-bottom:1px;}
+  .stat .val{font-weight:700;font-size:.92rem;font-family:'Plus Jakarta Sans',sans-serif;}
+  .tenant-card{background:#fff;border-radius:12px;border:1px solid var(--line);overflow:hidden;}
+  .tenant-card .th{padding:10px 12px;border-bottom:1px solid var(--line);font-weight:700;font-size:.75rem;font-family:'Plus Jakarta Sans',sans-serif;}
+  .trow{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-bottom:1px solid #f2f1ec;font-size:.7rem;}
+  .trow:last-child{border-bottom:none;}
+  .trow .who{display:flex;align-items:center;gap:8px;}
+  .avatar{width:22px;height:22px;border-radius:50%;background:var(--green-600);color:#fff;font-size:.6rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .badge{font-size:.6rem;font-weight:700;padding:2px 8px;border-radius:999px;}
+  .badge-paid{background:#DCFCE7;color:var(--green-600);}
+  .badge-unpaid{background:#FEE2E2;color:#991B1B;}
+
+  /* LOGO STRIP */
+  .strip{padding:28px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#fff;}
+  .strip .wrap{display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap;color:var(--muted);font-size:.85rem;font-weight:600;letter-spacing:.04em;}
+
+  /* SECTION HEADERS */
+  .section{padding:96px 0;}
+  .section-head{max-width:560px;margin-bottom:56px;}
+  .section-head .tag{color:var(--green-600);font-weight:700;font-size:.85rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;}
+  .section-head h2{font-size:2.4rem;font-weight:800;letter-spacing:-.01em;line-height:1.15;}
+  .section-head p{color:var(--muted);font-size:1.05rem;margin-top:14px;}
+  @media(max-width:760px){.section{padding:64px 0;}.section-head h2{font-size:1.9rem;}}
+
+  /* FEATURES */
+  .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  @media(max-width:880px){.feat-grid{grid-template-columns:1fr 1fr;}}
+  @media(max-width:560px){.feat-grid{grid-template-columns:1fr;}}
+  .feat{background:#fff;border:1px solid var(--line);border-radius:18px;padding:28px;transition:border-color .15s,transform .15s;}
+  .feat:hover{border-color:var(--green-600);transform:translateY(-3px);}
+  .feat .fi{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;}
+  .feat .fi svg{width:22px;height:22px;}
+  .feat h3{font-size:1.08rem;font-weight:700;margin-bottom:8px;}
+  .feat p{color:var(--muted);font-size:.92rem;}
+
+  /* HOW IT WORKS */
+  .how{background:var(--green-900);border-radius:28px;color:#fff;padding:64px 48px;position:relative;overflow:hidden;}
+  .how::before{content:"";position:absolute;bottom:-160px;left:-160px;width:380px;height:380px;border-radius:50%;background:rgba(245,158,11,.08);}
+  .how::after{content:"";position:absolute;top:-120px;right:-80px;width:280px;height:280px;border-radius:50%;background:rgba(22,101,52,.4);}
+  .how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;position:relative;z-index:1;}
+  @media(max-width:880px){.how-grid{grid-template-columns:1fr;gap:36px;}.how{padding:48px 28px;}}
+  .how-step .num{font-family:'Plus Jakarta Sans',sans-serif;font-size:.85rem;font-weight:800;color:var(--amber);letter-spacing:.06em;margin-bottom:14px;}
+  .how-step h3{font-size:1.25rem;font-weight:700;margin-bottom:10px;}
+  .how-step p{color:rgba(255,255,255,.65);font-size:.95rem;}
+
+  /* ROLES */
+  .roles-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  @media(max-width:760px){.roles-grid{grid-template-columns:1fr;}}
+  .role-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:32px;}
+  .role-card .rtag{display:inline-block;font-size:.75rem;font-weight:700;padding:5px 12px;border-radius:999px;margin-bottom:16px;}
+  .role-card.landlord .rtag{background:#DCFCE7;color:var(--green-600);}
+  .role-card.agent .rtag{background:#FEF3C7;color:#92400E;}
+  .role-card h3{font-size:1.4rem;font-weight:800;margin-bottom:14px;}
+  .role-card ul{list-style:none;padding:0;display:flex;flex-direction:column;gap:10px;}
+  .role-card li{display:flex;align-items:flex-start;gap:10px;font-size:.92rem;color:#374151;}
+  .role-card li svg{width:16px;height:16px;flex-shrink:0;margin-top:2px;color:var(--green-600);}
+
+  /* PRICING */
+  .pricing-card{
+    background:linear-gradient(135deg,var(--green-900) 0%,var(--green-600) 100%);
+    border-radius:24px;padding:56px;color:#fff;position:relative;overflow:hidden;
+    display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center;
+  }
+  .pricing-card::before{content:"";position:absolute;top:-100px;right:-100px;width:320px;height:320px;border-radius:50%;background:rgba(245,158,11,.15);}
+  @media(max-width:880px){.pricing-card{grid-template-columns:1fr;padding:36px;}}
+  .pricing-card h2{font-size:2rem;font-weight:800;margin-bottom:14px;}
+  .pricing-card p{color:rgba(255,255,255,.7);font-size:1rem;margin-bottom:24px;}
+  .price-box{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:18px;padding:28px;text-align:center;position:relative;z-index:1;}
+  .price-box .num{font-family:'Plus Jakarta Sans',sans-serif;font-size:3.2rem;font-weight:800;line-height:1;}
+  .price-box .num span{font-size:1.4rem;font-weight:700;}
+  .price-box .of{color:rgba(255,255,255,.6);font-size:.85rem;margin:6px 0 18px;}
+  .price-box .annual{background:var(--amber);color:#1a1300;border-radius:10px;padding:10px 14px;font-size:.8rem;font-weight:700;}
+  .pricing-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:10px;margin-top:8px;}
+  .pricing-list li{display:flex;align-items:flex-start;gap:10px;font-size:.92rem;color:rgba(255,255,255,.85);}
+  .pricing-list li svg{width:16px;height:16px;flex-shrink:0;margin-top:2px;color:var(--amber);}
+
+  /* CTA */
+  .cta{text-align:center;padding:100px 0;}
+  .cta h2{font-size:2.6rem;font-weight:800;letter-spacing:-.01em;margin-bottom:16px;}
+  .cta p{color:var(--muted);font-size:1.05rem;margin-bottom:36px;}
+  @media(max-width:760px){.cta h2{font-size:2rem;}}
+  .cta-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+
+  /* FOOTER */
+  footer{background:var(--green-900);color:rgba(255,255,255,.6);padding:48px 0 32px;}
+  footer .wrap{display:flex;flex-direction:column;gap:24px;}
+  .foot-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:24px;}
+  .foot-brand{display:flex;align-items:center;gap:10px;color:#fff;font-weight:700;font-size:1.05rem;font-family:'Plus Jakarta Sans',sans-serif;}
+  .foot-links{display:flex;gap:28px;font-size:.9rem;}
+  .foot-links a{text-decoration:none;color:rgba(255,255,255,.6);transition:color .15s;}
+  .foot-links a:hover{color:#fff;}
+  .foot-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:20px;font-size:.8rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9v.01"/><path d="M9 12v.01"/><path d="M9 15v.01"/><path d="M9 18v.01"/></svg>
+      </div>
+      NyumbaTrack
+    </div>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#roles">For landlords &amp; agents</a>
+      <a href="#pricing">Pricing</a>
+    </div>
+    <a class="nav-cta" href="https://wa.me/254710456455" target="_blank" rel="noopener">Book a demo</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow"><span class="dot"></span> Built for Kenyan landlords</div>
+      <h1>Run your rentals like a <span>bank app</span>, not a notebook.</h1>
+      <p class="lead">NyumbaTrack keeps every tenant, unit, payment and deposit in one place — so you always know what's collected, what's owed, and who owes it.</p>
+      <div class="hero-ctas">
+        <a class="btn-primary" href="https://wa.me/254710456455" target="_blank" rel="noopener">
+          Book a free demo
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+        <a class="btn-secondary" href="#how">See how it works</a>
+      </div>
+    </div>
+
+    <div class="phone reveal">
+      <div class="phone-screen">
+        <div class="phone-top">
+          <div class="pt-left">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#0d2818" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg></span>
+            Kindaruma Apartments
+          </div>
+          <div class="bell"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></div>
+        </div>
+        <div class="phone-body">
+          <div class="hero-card">
+            <div class="lbl">Current property</div>
+            <div class="name">Kindaruma Apartments</div>
+            <div class="loc">Nairobi, Kilimani</div>
+            <div class="pills">
+              <span class="pill pill-amber">88% occupied</span>
+              <span class="pill pill-w">8 units</span>
+              <span class="pill pill-w">100% collected</span>
+            </div>
+          </div>
+          <div class="stat-grid">
+            <div class="stat">
+              <div class="stat-ic" style="background:#DCFCE7"><svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m23 6-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg></div>
+              <div class="lbl">Collected</div>
+              <div class="val">Ksh 609,999</div>
+            </div>
+            <div class="stat">
+              <div class="stat-ic" style="background:#FEE2E2"><svg viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+              <div class="lbl">Outstanding</div>
+              <div class="val">Ksh 0</div>
+            </div>
+          </div>
+          <div class="tenant-card">
+            <div class="th">Tenants</div>
+            <div class="trow">
+              <div class="who"><span class="avatar">JK</span> John Kamau · A1</div>
+              <span class="badge badge-paid">Paid</span>
+            </div>
+            <div class="trow">
+              <div class="who"><span class="avatar">MW</span> Mary Weru · A2</div>
+              <span class="badge badge-paid">Paid</span>
+            </div>
+            <div class="trow">
+              <div class="who"><span class="avatar">SM</span> Samuel M. · A3</div>
+              <span class="badge badge-unpaid">Unpaid</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="strip">
+  <div class="wrap">
+    <span>Apartments</span>
+    <span>Plazas &amp; commercial stalls</span>
+    <span>Bedsitters &amp; single rooms</span>
+    <span>Multi-property portfolios</span>
+  </div>
+</div>
+
+<section class="section" id="features">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="tag">Everything in one app</div>
+      <h2>Stop juggling Excel sheets and WhatsApp notes.</h2>
+      <p>NyumbaTrack replaces scattered notebooks and spreadsheets with one simple system for every property you manage.</p>
+    </div>
+    <div class="feat-grid">
+
+      <div class="feat reveal">
+        <div class="fi" style="background:#EFF6FF"><svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3>Tenant records</h3>
+        <p>Names, phone numbers, emails, move-in dates and rent — searchable in one list per property.</p>
+      </div>
+
+      <div class="feat reveal">
+        <div class="fi" style="background:#DCFCE7"><svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20"/><path d="M6 15h2"/></svg></div>
+        <h3>Payments &amp; receipts</h3>
+        <p>Record M-Pesa, bank or cash payments and generate a clean PDF receipt instantly.</p>
+      </div>
+
+      <div class="feat reveal">
+        <div class="fi" style="background:#FEF3C7"><svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg></div>
+        <h3>Units overview</h3>
+        <p>See every unit at a glance — occupied or vacant, with its monthly rent price.</p>
+      </div>
+
+      <div class="feat reveal">
+        <div class="fi" style="background:#FCE7F3"><svg viewBox="0 0 24 24" fill="none" stroke="#DB2777" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></div>
+        <h3>Deposits tracker</h3>
+        <p>Know exactly how much deposit is held per tenant, and mark refunds when tenants leave.</p>
+      </div>
+
+      <div class="feat reveal">
+        <div class="fi" style="background:#E0E7FF"><svg viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></div>
+        <h3>Live notifications</h3>
+        <p>Landlords and agents are notified instantly when rent is paid, a tenant moves in, or rent is overdue.</p>
+      </div>
+
+      <div class="feat reveal">
+        <div class="fi" style="background:#F0FDF4"><svg viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></div>
+        <h3>Reports built in</h3>
+        <p>Year-to-date collections and monthly trends, ready whenever you need to check the numbers.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section" id="how">
+  <div class="wrap">
+    <div class="how">
+      <div class="section-head reveal" style="margin-bottom:48px;">
+        <div class="tag" style="color:var(--amber)">Getting started</div>
+        <h2 style="color:#fff">From sign-up to your first rent record in minutes.</h2>
+      </div>
+      <div class="how-grid">
+        <div class="how-step reveal">
+          <div class="num">STEP 1</div>
+          <h3>Add your properties</h3>
+          <p>Create a profile for each property — apartments, plazas, or single units — with the number of stalls or units it has.</p>
+        </div>
+        <div class="how-step reveal">
+          <div class="num">STEP 2</div>
+          <h3>Add tenants &amp; units</h3>
+          <p>List who's renting what, their contact details, move-in date and monthly rent. Mark empty units as vacant.</p>
+        </div>
+        <div class="how-step reveal">
+          <div class="num">STEP 3</div>
+          <h3>Record payments</h3>
+          <p>Each month, log who's paid. NyumbaTrack tracks who's due, sends notifications, and resets automatically.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="roles">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="tag">Who it's for</div>
+      <h2>Built for landlords — and the agents who run things day to day.</h2>
+      <p>Invite a caretaker or secretary to manage a specific property, without giving them the keys to everything.</p>
+    </div>
+    <div class="roles-grid">
+      <div class="role-card landlord reveal">
+        <span class="rtag">Landlord</span>
+        <h3>See everything, control everything</h3>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> View every property, tenant and payment in one place</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Invite agents to specific properties only</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Get notified the moment rent is paid</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Track deposits and occupancy at a glance</li>
+        </ul>
+      </div>
+      <div class="role-card agent reveal">
+        <span class="rtag">Agent / Caretaker</span>
+        <h3>Manage day-to-day, nothing more</h3>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Add tenants and record payments for assigned properties</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> See deposits and unit status</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Can't edit or delete properties</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Joins with a one-time invite code from the landlord</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="pricing">
+  <div class="wrap">
+    <div class="pricing-card reveal">
+      <div>
+        <h2>Simple, pay-as-you-collect pricing.</h2>
+        <p>No setup fees, no per-unit charges. You only pay based on the rent that actually comes in.</p>
+        <ul class="pricing-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Works the same whether you have 4 units or 100</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Unlimited tenants, units and payment records</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Add agents for any property at no extra cost</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Install it on your phone like any other app</li>
+        </ul>
+      </div>
+      <div class="price-box">
+        <div class="num">5<span>%</span></div>
+        <div class="of">of rent collected, per month</div>
+        <div class="annual">Pay annually, get 2 months free</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <h2 class="reveal">Ready to see it on your own properties?</h2>
+    <p class="reveal">Book a short demo and we'll set up your first property together — free, no obligation.</p>
+    <div class="cta-ctas reveal">
+      <a class="btn-primary" href="https://wa.me/254710456455" target="_blank" rel="noopener">
+        Chat on WhatsApp
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+      <a class="btn-secondary" href="mailto:leviweru9@gmail.com">Email us</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg>
+        </div>
+        NyumbaTrack
+      </div>
+      <div class="foot-links">
+        <a href="#features">Features</a>
+        <a href="#how">How it works</a>
+        <a href="#roles">Roles</a>
+        <a href="#pricing">Pricing</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 NyumbaTrack Technologies Ltd. Built for Kenyan landlords.</span>
+      <span>Nairobi, Kenya</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
