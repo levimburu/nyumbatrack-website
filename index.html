@@ -209,7 +209,7 @@ img { max-width: 100%; display: block; }
   padding-top: 32px; border-top: 1px solid var(--border);
 }
 .hero-proof-num {
-  font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700;
+  font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700;
   color: var(--green-700); line-height: 1;
 }
 .hero-proof-lbl { font-size: .72rem; color: var(--muted); margin-top: 3px; }
@@ -511,6 +511,20 @@ img { max-width: 100%; display: block; }
 .price-btn-green:hover { background: var(--amber-light); transform: translateY(-1px); }
 .price-annual { text-align: center; margin-top: 24px; font-size: .85rem; color: var(--muted); }
 .price-annual strong { color: var(--green-700); }
+.billing-toggle {
+  display: flex; justify-content: center; gap: 8px; margin-bottom: 40px;
+}
+.billing-btn {
+  padding: 10px 20px; border-radius: 999px; border: 1.5px solid var(--border);
+  background: #fff; color: var(--muted); font-size: .875rem; font-weight: 600;
+  cursor: pointer; transition: all .2s; display: flex; align-items: center; gap: 8px;
+}
+.billing-btn.active { background: var(--green-900); border-color: var(--green-900); color: #fff; }
+.billing-save {
+  font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .03em;
+  background: var(--amber); color: #1a1000; padding: 2px 8px; border-radius: 999px;
+}
+.billing-btn:not(.active) .billing-save { background: var(--amber-bg); color: var(--amber); }
 
 /* ============================================================
    CTA SECTION
@@ -1180,19 +1194,25 @@ footer { background: #040f07; padding: 64px 0 28px; }
   <div class="wrap">
     <div class="pricing-header reveal">
       <span class="tag tag-green">Pricing</span>
-      <h2 class="section-h">Pay only when<br/><em>rent comes in.</em></h2>
-      <p class="section-p">No setup fees. No per-unit charges. Your cost scales naturally with what you collect — fair whether you have 4 units or 400.</p>
+      <h2 class="section-h">Simple, flat pricing.<br/><em>No surprises.</em></h2>
+      <p class="section-p">One flat monthly fee based on how many units you manage. No percentage cuts on your rent, no per-tenant charges.</p>
     </div>
+
+    <div class="billing-toggle reveal">
+      <button type="button" class="billing-btn active" data-billing="monthly" onclick="setBilling('monthly')">Monthly</button>
+      <button type="button" class="billing-btn" data-billing="annual" onclick="setBilling('annual')">Annual <span class="billing-save">2 months free</span></button>
+    </div>
+
     <div class="pricing-grid">
 
       <!-- Starter -->
       <div class="price-card reveal">
         <div class="price-tier">Starter</div>
         <div class="price-amount">
-          <span class="price-pct">%</span>
-          <span class="price-num">5</span>
+          <span class="price-pct">Ksh</span>
+          <span class="price-num" data-monthly="2,500" data-annual="2,083">2,500</span>
         </div>
-        <div class="price-unit">of rent collected · monthly</div>
+        <div class="price-unit" data-monthly-label="per month" data-annual-label="per month, billed annually">per month</div>
         <p class="price-desc">Perfect for landlords just getting started. Everything you need, nothing you don't.</p>
         <ul class="price-list">
           <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Up to 10 units</li>
@@ -1201,6 +1221,7 @@ footer { background: #040f07; padding: 64px 0 28px; }
           <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Payment history</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="#d1d5db" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> <span style="color:#9ca3af;">Agent accounts</span></li>
         </ul>
+        <!-- TODO: replace with the real Paystack Subscription Payment Page link for Starter (Ksh 2,500/mo) once created -->
         <a class="price-btn price-btn-outline" href="https://wa.me/254710456455" target="_blank">Get started</a>
       </div>
 
@@ -1209,42 +1230,44 @@ footer { background: #040f07; padding: 64px 0 28px; }
         <div class="price-popular">Most popular</div>
         <div class="price-tier">Pro</div>
         <div class="price-amount">
-          <span class="price-pct">%</span>
-          <span class="price-num">5</span>
+          <span class="price-pct">Ksh</span>
+          <span class="price-num" data-monthly="3,500" data-annual="2,917">3,500</span>
         </div>
-        <div class="price-unit">of rent collected · monthly</div>
-        <p class="price-desc">For landlords who want full control — unlimited units, agents, and reports.</p>
+        <div class="price-unit" data-monthly-label="per month" data-annual-label="per month, billed annually">per month</div>
+        <p class="price-desc">For landlords who want full control — more units, agents, and reports.</p>
         <ul class="price-list">
-          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Unlimited units</li>
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Up to 20 units</li>
           <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Unlimited tenants</li>
           <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> PDF receipts</li>
           <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Agent accounts</li>
           <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Monthly reports</li>
         </ul>
-        <a class="price-btn price-btn-green" href="https://wa.me/254710456455" target="_blank">Get started free</a>
+        <!-- TODO: replace with the real Paystack Subscription Payment Page link for Pro (Ksh 3,500/mo) once created -->
+        <a class="price-btn price-btn-green" href="https://wa.me/254710456455" target="_blank">Get started</a>
       </div>
 
-      <!-- Annual -->
+      <!-- Max -->
       <div class="price-card reveal d2">
-        <div class="price-tier">Annual</div>
-        <div class="price-amount" style="align-items:center;">
-          <span class="price-pct">%</span>
-          <span class="price-num">5</span>
+        <div class="price-tier">Max</div>
+        <div class="price-amount">
+          <span class="price-pct">Ksh</span>
+          <span class="price-num" data-monthly="6,000" data-annual="5,000">6,000</span>
         </div>
-        <div class="price-unit">billed yearly · 2 months free</div>
-        <p class="price-desc">Everything in Pro — pay for 10 months and get the full year. Best value for committed landlords.</p>
+        <div class="price-unit" data-monthly-label="per month" data-annual-label="per month, billed annually">per month</div>
+        <p class="price-desc">For landlords managing large portfolios — unlimited units, no caps.</p>
         <ul class="price-list">
-          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Everything in Pro</li>
-          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 2 months completely free</li>
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Unlimited units</li>
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Unlimited tenants</li>
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Agent accounts</li>
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Monthly reports</li>
           <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Priority support</li>
-          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Early access to new features</li>
-          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Founding member pricing locked</li>
         </ul>
+        <!-- TODO: replace with the real Paystack Subscription Payment Page link for Max (Ksh 6,000/mo) once created -->
         <a class="price-btn price-btn-outline" href="https://wa.me/254710456455" target="_blank">Talk to us</a>
       </div>
 
     </div>
-    <p class="price-annual reveal" style="margin-top:32px;">All plans include a <strong>free trial period</strong> — no credit card needed to start.</p>
+    <p class="price-annual reveal" style="margin-top:32px;">Pay by <strong>card, M-Pesa, or Apple Pay</strong> — no credit card required to start your trial.</p>
   </div>
 </section>
 
@@ -1343,6 +1366,23 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 window.addEventListener('resize', () => {
   if (window.innerWidth > 768) document.getElementById('mobileMenu').classList.remove('open');
 });
+
+/* ---- Pricing: Monthly / Annual billing toggle ----
+   Each .price-num carries data-monthly / data-annual attributes with the
+   pre-computed values (annual = pay for 10 months, get 12 — i.e. 2 free
+   months, per the confirmed pricing). This just swaps text content and
+   the small unit label; no page reload, no server round-trip needed. */
+function setBilling(period) {
+  document.querySelectorAll('.billing-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.billing === period);
+  });
+  document.querySelectorAll('.price-num').forEach(el => {
+    el.textContent = period === 'annual' ? el.dataset.annual : el.dataset.monthly;
+  });
+  document.querySelectorAll('.price-unit').forEach(el => {
+    el.textContent = period === 'annual' ? el.dataset.annualLabel : el.dataset.monthlyLabel;
+  });
+}
 </script>
 </body>
 </html>
