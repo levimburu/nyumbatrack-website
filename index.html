@@ -30,6 +30,15 @@
    RESET & TOKENS
    ============================================================ */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+/* Safety net: CSS Grid/Flex items default to min-width:auto, which means
+   they can refuse to shrink below their content's natural width even
+   inside a 1fr track — a common cause of horizontal overflow on narrow
+   phones that isn't visible just from reading each section's own CSS. */
+.features-grid > *, .how-grid > *, .pricing-grid > *, .benefits-inner > *,
+.preview-section-inner > *, .testimonials-grid > *, .hero > * {
+  min-width: 0;
+}
 :root {
   --green-900: #0d2818;
   --green-800: #0f3520;
