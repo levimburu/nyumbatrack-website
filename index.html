@@ -170,6 +170,11 @@ img { max-width: 100%; display: block; }
 }
 .mobile-menu.open { display: block; }
 .mobile-menu a { display: block; font-size: 1rem; font-weight: 500; color: rgba(255,255,255,.8); padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.08); }
+.mobile-menu a.nav-cta {
+  text-align: center; padding: 12px 20px; margin-top: 12px;
+  border-bottom: none; border-radius: 8px; background: var(--amber); color: #1a1000; font-weight: 700;
+}
+.mobile-menu a.nav-cta:hover { background: var(--amber-light); }
 .mobile-menu a:last-child { border-bottom: none; }
 
 /* ============================================================
@@ -629,8 +634,7 @@ footer { background: #040f07; padding: 64px 0 28px; }
       <a href="#testimonials">Reviews</a>
     </nav>
     <div class="nav-actions">
-      <a class="nav-login" href="https://app.nyumbatrack.com" target="_blank">Log in</a>
-      <a class="nav-cta" href="https://wa.me/254710456455" target="_blank">Get started</a>
+      <a class="nav-cta" href="https://app.nyumbatrack.com" target="_blank">Log in</a>
     </div>
     <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
       <span></span><span></span><span></span>
@@ -643,7 +647,7 @@ footer { background: #040f07; padding: 64px 0 28px; }
   <a href="#how" onclick="toggleMenu()">How it works</a>
   <a href="#pricing" onclick="toggleMenu()">Pricing</a>
   <a href="#testimonials" onclick="toggleMenu()">Reviews</a>
-  <a href="https://app.nyumbatrack.com" target="_blank">Log in →</a>
+  <a class="nav-cta" href="https://app.nyumbatrack.com" target="_blank">Log in</a>
 </div>
 
 <!-- ============================================================
@@ -665,7 +669,7 @@ footer { background: #040f07; padding: 64px 0 28px; }
       </h1>
       <p class="hero-sub">NyumbaTrack replaces notebooks, WhatsApp reminders, and Excel sheets with one elegant system — so you always know who's paid, who owes, and who's behind. From any phone.</p>
       <div class="hero-btns">
-        <a class="btn btn-green btn-lg" href="https://wa.me/254710456455" target="_blank">
+        <a class="btn btn-green btn-lg" href="https://app.nyumbatrack.com" target="_blank">
           Start managing smarter
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
         </a>
