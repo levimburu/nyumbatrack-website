@@ -258,7 +258,7 @@ img { max-width: 100%; display: block; }
    APP MOCKUP (hero right)
    ============================================================ */
 
-/* iPhone frame — dark titanium bezel, Dynamic Island, iOS status bar
+/* iPhone frame — black titanium bezel, Dynamic Island, iOS status bar
    and home indicator. The existing .mockup-shell app UI sits inside it. */
 .iphone {
   width: 100%; max-width: 340px; position: relative; z-index: 1;
@@ -438,6 +438,11 @@ img { max-width: 100%; display: block; }
   background: var(--green-900); padding: 14px 18px;
   display: flex; align-items: center; justify-content: space-between;
 }
+.mac-traffic-lights { display: flex; align-items: center; gap: 8px; }
+.mac-dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+.mac-dot-red { background: #ff5f57; }
+.mac-dot-yellow { background: #febc2e; }
+.mac-dot-green { background: #28c840; }
 .preview-tabs { display: flex; gap: 4px; }
 .preview-tab { padding: 5px 12px; border-radius: 6px; font-size: .72rem; font-weight: 600; color: rgba(255,255,255,.5); cursor: pointer; }
 .preview-tab.active { background: rgba(255,255,255,.12); color: #fff; }
@@ -465,18 +470,16 @@ img { max-width: 100%; display: block; }
 .preview-section { padding: 100px 0; background: var(--green-900); overflow: hidden; }
 .preview-section-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
 @media (max-width: 900px) { .preview-section-inner { grid-template-columns: 1fr; } }
-.preview-phone {
-  background: #fff; border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg); overflow: hidden;
-  max-width: 360px; margin: 0 auto;
-  animation: floatUp 7s ease-in-out infinite;
-}
+.preview-phone-frame { max-width: 360px; margin: 0 auto; }
 .phone-status {
-  background: var(--green-900); padding: 8px 16px;
+  position: relative;
+  height: 44px;
+  background: var(--green-900);
   display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px 0 28px;
 }
 .phone-time { font-size: .72rem; font-weight: 600; color: #fff; }
-.phone-icons { display: flex; gap: 4px; }
+.phone-icons { display: flex; align-items: center; gap: 6px; }
 .phone-body { padding: 16px; background: var(--bg-grey); }
 .phone-section-label { font-size: .6rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; margin-top: 14px; }
 .phone-section-label:first-child { margin-top: 0; }
@@ -958,6 +961,11 @@ footer { background: #040f07; padding: 64px 0 28px; }
       <!-- preview card left -->
       <div class="preview-card reveal">
         <div class="preview-header">
+          <div class="mac-traffic-lights">
+            <span class="mac-dot mac-dot-red"></span>
+            <span class="mac-dot mac-dot-yellow"></span>
+            <span class="mac-dot mac-dot-green"></span>
+          </div>
           <div class="preview-tabs">
             <div class="preview-tab active">My Properties</div>
             <div class="preview-tab">Reports</div>
@@ -1082,80 +1090,87 @@ footer { background: #040f07; padding: 64px 0 28px; }
       </div>
 
       <!-- phone mockup right -->
-      <div class="preview-phone reveal">
-        <div class="phone-status">
-          <span class="phone-time">9:41</span>
-          <div class="phone-icons">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="2"><path d="M1 6s4-3 11-3 11 3 11 3"/><path d="M5 10s2.5-2 7-2 7 2 7 2"/><path d="M9 14s1.5-1 3-1 3 1 3 1"/><circle cx="12" cy="18" r="1" fill="rgba(255,255,255,.7)"/></svg>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="2"><rect x="2" y="7" width="20" height="11" rx="2"/><path d="M22 11h1a1 1 0 0 1 0 2h-1"/></svg>
+      <div class="iphone preview-phone-frame reveal">
+        <div class="iphone-screen">
+          <div class="dynamic-island"></div>
+          <div class="phone-status">
+            <span class="phone-time">9:41</span>
+            <div class="phone-icons">
+              <!-- signal -->
+              <svg width="18" height="12" viewBox="0 0 18 12" fill="#fff"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="2.5" width="3" height="9.5" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+              <!-- wifi -->
+              <svg width="17" height="12" viewBox="0 0 17 12" fill="#fff"><path d="M8.5 2.2c2.6 0 5 1 6.8 2.6a.6.6 0 0 0 .84-.02l.5-.52a.6.6 0 0 0-.02-.86A12 12 0 0 0 8.5 0 12 12 0 0 0 .38 3.4a.6.6 0 0 0-.02.86l.5.52a.6.6 0 0 0 .84.02A9.4 9.4 0 0 1 8.5 2.2Z"/><path d="M8.5 5.6c1.6 0 3.06.6 4.16 1.6a.6.6 0 0 0 .82-.02l.52-.54a.6.6 0 0 0-.03-.87A9 9 0 0 0 8.5 3.4a9 9 0 0 0-5.47 2.37.6.6 0 0 0-.03.87l.52.54a.6.6 0 0 0 .82.02A6.2 6.2 0 0 1 8.5 5.6Z"/><path d="M8.5 8.8c.72 0 1.38.26 1.9.7a.6.6 0 0 0 .8-.04l.9-.92-.02-.02A5 5 0 0 0 8.5 7a5 5 0 0 0-3.58 1.5l.9.94a.6.6 0 0 0 .8.04c.5-.44 1.16-.68 1.88-.68Z"/><circle cx="8.5" cy="11" r="1.1"/></svg>
+              <!-- battery -->
+              <svg width="26" height="12" viewBox="0 0 26 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3" stroke="#fff" opacity="0.5"/><rect x="2" y="2" width="18" height="8" rx="1.5" fill="#fff"/><rect x="23" y="4" width="1.5" height="4" rx="0.75" fill="#fff" opacity="0.5"/></svg>
+            </div>
           </div>
-        </div>
-        <div class="phone-body">
+          <div class="phone-body">
 
-          <div class="summary-card">
-            <div class="summary-label">June 2026 — Total Collected</div>
-            <div class="summary-amount">Ksh 879,999</div>
-            <div class="summary-sub">Across 2 properties · 13 of 17 units paid</div>
-            <div class="summary-row">
-              <div class="summary-mini">
-                <div class="summary-mini-label">Outstanding</div>
-                <div class="summary-mini-val" style="color:#f87171;">Ksh 155,000</div>
+            <div class="summary-card">
+              <div class="summary-label">June 2026 — Total Collected</div>
+              <div class="summary-amount">Ksh 879,999</div>
+              <div class="summary-sub">Across 2 properties · 13 of 17 units paid</div>
+              <div class="summary-row">
+                <div class="summary-mini">
+                  <div class="summary-mini-label">Outstanding</div>
+                  <div class="summary-mini-val" style="color:#f87171;">Ksh 155,000</div>
+                </div>
+                <div class="summary-mini">
+                  <div class="summary-mini-label">Deposited</div>
+                  <div class="summary-mini-val" style="color:#4ade80;">Ksh 340,000</div>
+                </div>
               </div>
-              <div class="summary-mini">
-                <div class="summary-mini-label">Deposited</div>
-                <div class="summary-mini-val" style="color:#4ade80;">Ksh 340,000</div>
+            </div>
+
+            <div class="phone-section-label">Recent Payments</div>
+
+            <div class="receipt-card">
+              <div class="receipt-top">
+                <div class="receipt-name">Grace Achieng</div>
+                <div class="receipt-amount">Ksh 18,000</div>
+              </div>
+              <div class="receipt-meta">
+                <span class="receipt-unit">Unit 2A · Kindaruma</span>
+                <span class="receipt-btn">PDF ↓</span>
               </div>
             </div>
+
+            <div class="receipt-card">
+              <div class="receipt-top">
+                <div class="receipt-name">Brian Odhiambo</div>
+                <div class="receipt-amount">Ksh 12,000</div>
+              </div>
+              <div class="receipt-meta">
+                <span class="receipt-unit">Unit 4B · Kirethi Villas</span>
+                <span class="receipt-btn">PDF ↓</span>
+              </div>
+            </div>
+
+            <div class="phone-section-label">Notifications</div>
+
+            <div class="notif-item">
+              <div class="notif-ic" style="background:var(--green-100);">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div>
+                <div class="notif-title">Rent recorded</div>
+                <div class="notif-body">Grace Achieng paid Ksh 18,000 for Unit 2A</div>
+              </div>
+              <div class="notif-time">2m ago</div>
+            </div>
+
+            <div class="notif-item">
+              <div class="notif-ic" style="background:#fef9c3;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ca8a04" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              </div>
+              <div>
+                <div class="notif-title">Partial payment</div>
+                <div class="notif-body">James Mutua paid Ksh 8,000 of Ksh 15,000</div>
+              </div>
+              <div class="notif-time">1h ago</div>
+            </div>
+
           </div>
-
-          <div class="phone-section-label">Recent Payments</div>
-
-          <div class="receipt-card">
-            <div class="receipt-top">
-              <div class="receipt-name">Grace Achieng</div>
-              <div class="receipt-amount">Ksh 18,000</div>
-            </div>
-            <div class="receipt-meta">
-              <span class="receipt-unit">Unit 2A · Kindaruma</span>
-              <span class="receipt-btn">PDF ↓</span>
-            </div>
-          </div>
-
-          <div class="receipt-card">
-            <div class="receipt-top">
-              <div class="receipt-name">Brian Odhiambo</div>
-              <div class="receipt-amount">Ksh 12,000</div>
-            </div>
-            <div class="receipt-meta">
-              <span class="receipt-unit">Unit 4B · Kirethi Villas</span>
-              <span class="receipt-btn">PDF ↓</span>
-            </div>
-          </div>
-
-          <div class="phone-section-label">Notifications</div>
-
-          <div class="notif-item">
-            <div class="notif-ic" style="background:var(--green-100);">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            </div>
-            <div>
-              <div class="notif-title">Rent recorded</div>
-              <div class="notif-body">Grace Achieng paid Ksh 18,000 for Unit 2A</div>
-            </div>
-            <div class="notif-time">2m ago</div>
-          </div>
-
-          <div class="notif-item">
-            <div class="notif-ic" style="background:#fef9c3;">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ca8a04" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            </div>
-            <div>
-              <div class="notif-title">Partial payment</div>
-              <div class="notif-body">James Mutua paid Ksh 8,000 of Ksh 15,000</div>
-            </div>
-            <div class="notif-time">1h ago</div>
-          </div>
-
         </div>
       </div>
 
@@ -1279,8 +1294,8 @@ footer { background: #040f07; padding: 64px 0 28px; }
         <div class="price-unit" data-monthly-label="per month" data-annual-label="per month, billed annually">per month</div>
         <p class="price-desc">Perfect for landlords just getting started. Everything you need, nothing you don't.</p>
         <ul class="price-list">
-          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 1 property</li>
-          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Up to 20 units</li>
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Up to 3 properties</li>
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Up to 35 units</li>
           <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Unlimited tenants</li>
           <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> PDF receipts</li>
           <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Payment history</li>
@@ -1301,8 +1316,8 @@ footer { background: #040f07; padding: 64px 0 28px; }
         <div class="price-unit" data-monthly-label="per month" data-annual-label="per month, billed annually">per month</div>
         <p class="price-desc">For landlords who want full control — more properties, agents, and reports.</p>
         <ul class="price-list">
-          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Up to 5 properties</li>
-          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Up to 100 units</li>
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Up to 7 properties</li>
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Up to 150 units</li>
           <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Unlimited tenants</li>
           <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> PDF receipts</li>
           <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Agent accounts</li>
