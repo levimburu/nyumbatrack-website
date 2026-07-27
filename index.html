@@ -4,7 +4,26 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>NyumbaTrack — Rental Management Built for Kenyan Landlords</title>
-<link rel="icon" type="image/png" href="/icon-512.png"/>
+
+<!-- Organization structured data — tells Google the official name and logo
+     to show in search results and knowledge panels, rather than leaving it
+     to guess from the favicon alone. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "NyumbaTrack",
+  "url": "https://www.nyumbatrack.com",
+  "logo": "https://www.nyumbatrack.com/icon-512-square.png",
+  "description": "Rental management software built for Kenyan landlords — track rent, manage tenants, and send receipts.",
+  "sameAs": [
+    "https://app.nyumbatrack.com"
+  ]
+}
+</script>
+
+<link rel="icon" type="image/png" href="/icon-512-square.png"/>
+<link rel="apple-touch-icon" href="/icon-512-square.png"/>
 <meta name="description" content="Track rent, manage tenants, send receipts and stay on top of every property — NyumbaTrack is the simplest rental management system built for African landlords."/>
 
 <!-- Open Graph — controls how this link looks when shared on WhatsApp, LinkedIn, etc. -->
@@ -238,10 +257,53 @@ img { max-width: 100%; display: block; }
 /* ============================================================
    APP MOCKUP (hero right)
    ============================================================ */
+
+/* iPhone frame — dark titanium bezel, Dynamic Island, iOS status bar
+   and home indicator. The existing .mockup-shell app UI sits inside it. */
+.iphone {
+  width: 100%; max-width: 340px; position: relative; z-index: 1;
+  background: #0a0a0a;
+  border-radius: 54px;
+  padding: 12px;
+  box-shadow: var(--shadow-lg), 0 0 0 2px #1c1c1e, inset 0 0 0 2px #2a2a2c;
+  animation: floatUp 7s ease-in-out infinite;
+}
+.iphone-screen {
+  position: relative;
+  border-radius: 42px;
+  overflow: hidden;
+  background: var(--green-900);
+}
+/* iOS status bar: time on the left, signal/wifi/battery on the right */
+.ios-statusbar {
+  position: relative;
+  height: 44px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px 0 28px;
+  background: var(--green-900);
+  color: #fff;
+  z-index: 3;
+}
+.ios-time { font-size: 14px; font-weight: 600; letter-spacing: .3px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+.ios-icons { display: flex; align-items: center; gap: 6px; }
+/* Dynamic Island — the black pill centered at the top */
+.dynamic-island {
+  position: absolute; top: 9px; left: 50%; transform: translateX(-50%);
+  width: 94px; height: 28px; background: #000; border-radius: 999px; z-index: 4;
+}
+/* Home indicator bar at the very bottom */
+.home-indicator {
+  height: 22px; background: var(--green-900);
+  display: flex; align-items: flex-end; justify-content: center; padding-bottom: 7px;
+}
+.home-indicator::after {
+  content: ''; width: 120px; height: 5px; border-radius: 999px;
+  background: rgba(255,255,255,.55);
+}
+
 .mockup-shell {
-  background: #fff; border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg), 0 0 0 1px rgba(0,0,0,.06);
-  overflow: hidden; animation: floatUp 7s ease-in-out infinite;
+  background: #fff;
+  overflow: hidden;
 }
 @keyframes floatUp { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-12px);} }
 .mockup-bar {
@@ -671,7 +733,21 @@ footer { background: #040f07; padding: 64px 0 28px; }
   <div class="hero-right">
     <div class="hero-right-glow"></div>
     <div class="hero-right-glow2"></div>
-    <div class="mockup-shell reveal" style="width:100%;max-width:400px;position:relative;z-index:1;">
+    <div class="iphone reveal">
+      <div class="iphone-screen">
+        <div class="dynamic-island"></div>
+        <div class="ios-statusbar">
+          <span class="ios-time">9:41</span>
+          <div class="ios-icons">
+            <!-- signal -->
+            <svg width="18" height="12" viewBox="0 0 18 12" fill="#fff"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="2.5" width="3" height="9.5" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+            <!-- wifi -->
+            <svg width="17" height="12" viewBox="0 0 17 12" fill="#fff"><path d="M8.5 2.2c2.6 0 5 1 6.8 2.6a.6.6 0 0 0 .84-.02l.5-.52a.6.6 0 0 0-.02-.86A12 12 0 0 0 8.5 0 12 12 0 0 0 .38 3.4a.6.6 0 0 0-.02.86l.5.52a.6.6 0 0 0 .84.02A9.4 9.4 0 0 1 8.5 2.2Z"/><path d="M8.5 5.6c1.6 0 3.06.6 4.16 1.6a.6.6 0 0 0 .82-.02l.52-.54a.6.6 0 0 0-.03-.87A9 9 0 0 0 8.5 3.4a9 9 0 0 0-5.47 2.37.6.6 0 0 0-.03.87l.52.54a.6.6 0 0 0 .82.02A6.2 6.2 0 0 1 8.5 5.6Z"/><path d="M8.5 8.8c.72 0 1.38.26 1.9.7a.6.6 0 0 0 .8-.04l.9-.92-.02-.02A5 5 0 0 0 8.5 7a5 5 0 0 0-3.58 1.5l.9.94a.6.6 0 0 0 .8.04c.5-.44 1.16-.68 1.88-.68Z"/><circle cx="8.5" cy="11" r="1.1"/></svg>
+            <!-- battery -->
+            <svg width="26" height="12" viewBox="0 0 26 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3" stroke="#fff" opacity="0.5"/><rect x="2" y="2" width="18" height="8" rx="1.5" fill="#fff"/><rect x="23" y="4" width="1.5" height="4" rx="0.75" fill="#fff" opacity="0.5"/></svg>
+          </div>
+        </div>
+        <div class="mockup-shell">
         <div class="mockup-bar">
           <div class="mockup-brand">
             <div class="mockup-brand-ic">
