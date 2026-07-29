@@ -531,6 +531,17 @@ img { max-width: 100%; display: block; }
 .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 64px; }
 @media (max-width: 900px) { .testimonials-grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 560px) { .testimonials-grid { grid-template-columns: 1fr; } }
+
+/* In-action photo grid — three real-world scenes with captions underneath.
+   object-fit:cover on a fixed-ratio box keeps all three consistent even
+   though the source photos have slightly different native aspect ratios. */
+.people-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+@media (max-width: 900px) { .people-grid { grid-template-columns: 1fr; } }
+.people-card { border-radius: var(--radius-lg); overflow: hidden; background: #fff; border: 1px solid var(--border); }
+.people-card .people-photo-wrap { aspect-ratio: 4 / 3; overflow: hidden; }
+.people-card img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.people-card-caption { padding: 20px 22px; }
+.people-card-caption p { font-size: .9rem; color: var(--muted); line-height: 1.6; }
 .testi-card {
   background: #fff; border: 1px solid var(--border); border-radius: var(--radius-lg);
   padding: 28px; box-shadow: var(--shadow-sm);
@@ -850,9 +861,9 @@ footer { background: #040f07; padding: 64px 0 28px; }
 <section class="features-section" id="features">
   <div class="wrap">
     <div class="features-header reveal">
-      <span class="tag tag-green">Everything in one place</span>
-      <h2 class="section-h">Stop juggling three apps<br/>to manage one property.</h2>
-      <p class="section-p" style="max-width:480px;">NyumbaTrack is the single system that keeps every property, tenant, and shilling organised — without the complexity.</p>
+      <span class="tag tag-green">Built for property managers</span>
+      <h2 class="section-h">From one unit to an<br/>entire portfolio.</h2>
+      <p class="section-p" style="max-width:520px;">NyumbaTrack handles the whole job — tenants, payments, maintenance, compliance, vendors, and owner reporting — so nothing gets managed over WhatsApp and paper anymore.</p>
     </div>
     <div class="features-grid">
 
@@ -928,6 +939,84 @@ footer { background: #040f07; padding: 64px 0 28px; }
         <p>See total collected, outstanding, and per-property breakdowns — every month, automatically. No spreadsheets needed.</p>
       </div>
 
+      <div class="feat-card reveal">
+        <div class="feat-ic" style="background:rgba(201,168,76,.1);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94z"/></svg>
+        </div>
+        <h3>Maintenance Tickets</h3>
+        <p>Log a leaking tap or broken gate the moment a tenant reports it. Assign it to a vendor, track it through to done — nothing falls through the cracks between phone calls.</p>
+      </div>
+
+      <div class="feat-card reveal d1">
+        <div class="feat-ic" style="background:rgba(22,101,52,.1);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.79 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+        </div>
+        <h3>Compliance Tracking</h3>
+        <p>Every fire certificate, business permit, and tax compliance document in one place — with automatic Valid, Expiring Soon, and Expired status. No scrambling before a surprise inspection.</p>
+      </div>
+
+      <div class="feat-card reveal d2">
+        <div class="feat-ic" style="background:rgba(124,58,237,.08);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        </div>
+        <h3>Vendor Directory</h3>
+        <p>Keep your plumber, electrician, and security contractor's contacts in one place — linked directly to the tickets you assign them, not scattered across WhatsApp chats.</p>
+      </div>
+
+      <div class="feat-card reveal">
+        <div class="feat-ic" style="background:rgba(37,99,235,.08);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h3>Tenant Communication Log</h3>
+        <p>Every phone call, WhatsApp message, and written notice — logged against the tenant it concerns. When a dispute comes up months later, you have the record.</p>
+      </div>
+
+      <div class="feat-card reveal d1">
+        <div class="feat-ic" style="background:rgba(239,68,68,.08);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </div>
+        <h3>Owner Statements</h3>
+        <p>Managing property on someone else's behalf? Generate a branded PDF statement — rent collected, maintenance costs, net payout — for any landlord, any date range, in seconds.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     IN ACTION — three real-world scenes
+     ============================================================ -->
+<section class="features-section" id="in-action" style="background:var(--bg-grey);">
+  <div class="wrap">
+    <div class="features-header reveal">
+      <span class="tag tag-green">Built for how you work</span>
+      <h2 class="section-h">One desk. One team.<br/>One tenant at a time.</h2>
+    </div>
+    <div class="people-grid">
+      <div class="people-card reveal">
+        <div class="people-photo-wrap">
+          <img src="people-desk.jpg" alt="Property manager reviewing the NyumbaTrack portfolio dashboard on a laptop" loading="lazy" />
+        </div>
+        <div class="people-card-caption">
+          <p>Your whole portfolio, one screen — before your first site visit of the day.</p>
+        </div>
+      </div>
+      <div class="people-card reveal d1">
+        <div class="people-photo-wrap">
+          <img src="people-office.jpg" alt="Two colleagues reviewing NyumbaTrack together in an office" loading="lazy" />
+        </div>
+        <div class="people-card-caption">
+          <p>Everyone on the team sees the same numbers — no more chasing updates over WhatsApp.</p>
+        </div>
+      </div>
+      <div class="people-card reveal d2">
+        <div class="people-photo-wrap">
+          <img src="people-onsite.jpg" alt="Property manager checking tenant status on the NyumbaTrack mobile app on-site" loading="lazy" />
+        </div>
+        <div class="people-card-caption">
+          <p>Checking on a tenant, right from the courtyard — no laptop, no paperwork.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
