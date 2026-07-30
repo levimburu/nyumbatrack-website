@@ -552,6 +552,12 @@ img { max-width: 100%; display: block; }
 @media (max-width: 900px) { .people-grid { grid-template-columns: 1fr; } }
 .people-card { border-radius: var(--radius-lg); overflow: hidden; background: #fff; border: 1px solid var(--border); }
 .people-card .people-photo-wrap { aspect-ratio: 4 / 3; overflow: hidden; }
+/* On narrow screens the grid drops to a single column, so each photo has
+   room to go taller/narrower (portrait) instead of staying landscape —
+   object-fit:cover handles the re-crop automatically, no new images needed. */
+@media (max-width: 640px) {
+  .people-card .people-photo-wrap { aspect-ratio: 3 / 4; }
+}
 .people-card img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .people-card-caption { padding: 20px 22px; }
 .people-card-caption p { font-size: .9rem; color: var(--muted); line-height: 1.6; }
