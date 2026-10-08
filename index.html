@@ -268,6 +268,27 @@ img { max-width: 100%; display: block; }
   bottom: -40px; left: -40px; z-index: 1;
 }
 
+/* ---- Hero left panel enrichment ---- */
+/* Three concrete capability lines give the value prop visual structure
+   instead of one grey paragraph; each names a real landlord worry. */
+.hero-points { margin: 26px 0 34px; display: flex; flex-direction: column; gap: 13px; }
+.hero-point { display: flex; align-items: center; gap: 11px; font-size: .96rem; color: var(--ink-3); }
+.hero-point-tick {
+  flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%;
+  background: var(--green-100); display: grid; place-items: center;
+}
+/* Honest proof row — reassurance without fabricated numbers. */
+.hero-proof { display: flex; align-items: center; gap: 12px; margin-top: 32px; }
+.hero-proof-avatars { display: flex; }
+.hero-proof-avatars span {
+  width: 34px; height: 34px; border-radius: 50%; border: 2px solid #fff;
+  margin-left: -10px; display: grid; place-items: center;
+  font-size: .72rem; font-weight: 700; color: #fff;
+}
+.hero-proof-avatars span:first-child { margin-left: 0; }
+.hero-proof-text { font-size: .82rem; color: var(--muted); line-height: 1.45; }
+.hero-proof-text strong { color: var(--ink-2); font-weight: 600; }
+
 /* ---- Properties showcase band (real building photography) ---- */
 .props-section { padding: 100px 0; background: #fff; }
 .props-grid {
@@ -833,13 +854,33 @@ footer { background: #040f07; padding: 64px 0 28px; }
         Tracked.<br/>
         <em>Finally.</em>
       </h1>
-      <p class="hero-sub">NyumbaTrack replaces notebooks, WhatsApp reminders, and Excel sheets with one elegant system — so you always know who's paid, who owes, and who's behind. From any phone.</p>
+      <p class="hero-sub">One system in place of notebooks, WhatsApp reminders and Excel sheets. At a glance:</p>
+      <div class="hero-points">
+        <div class="hero-point">
+          <span class="hero-point-tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          Who has paid this month
+        </div>
+        <div class="hero-point">
+          <span class="hero-point-tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          Who still owes, and how much
+        </div>
+        <div class="hero-point">
+          <span class="hero-point-tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          Who is falling behind — before it's a problem
+        </div>
+      </div>
       <div class="hero-btns">
-        <a class="btn btn-green btn-lg" href="https://app.nyumbatrack.com" target="_blank">
-          Start managing smarter
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-        </a>
+        <a class="btn btn-green btn-lg" href="https://app.nyumbatrack.com" target="_blank">Start managing smarter</a>
         <a class="btn btn-outline btn-lg" href="#features">See features</a>
+      </div>
+      <div class="hero-proof">
+        <div class="hero-proof-avatars">
+          <span style="background:#166534;">AK</span>
+          <span style="background:#c9a84c;">JM</span>
+          <span style="background:#0f3520;">SW</span>
+          <span style="background:#16a34a;">+</span>
+        </div>
+        <div class="hero-proof-text">Landlords and agents across Kenya already run<br/>their rent on NyumbaTrack — from any phone.</div>
       </div>
     </div>
   </div>
