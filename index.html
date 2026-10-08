@@ -237,21 +237,38 @@ img { max-width: 100%; display: block; }
 }
 .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
 
-/* RIGHT PANEL — dark green */
+/* RIGHT PANEL — real building photo behind the app mockup.
+   The photo sits in .hero-right-photo; a dark-green gradient overlay keeps
+   the brand mood and makes the floating iPhone readable over any image.
+   If hero-building.jpg is missing, the green background below still shows,
+   so the hero never looks broken in the gap before the photo is added. */
 .hero-right {
   background: var(--green-900); display: flex; align-items: center; justify-content: center;
   padding: 80px 48px 80px 40px; position: relative; overflow: hidden;
 }
 @media (max-width: 900px) { .hero-right { padding: 48px 24px 64px; min-height: 500px; } }
+.hero-right-photo {
+  position: absolute; inset: 0; z-index: 0;
+  background-image: url('hero-building.jpg');
+  background-size: cover; background-position: center;
+}
+/* Dark-green gradient scrim over the photo — richer at the bottom-left where
+   the phone's shadow falls, lighter top-right so the building stays visible. */
+.hero-right-photo::after {
+  content: ""; position: absolute; inset: 0;
+  background:
+    linear-gradient(135deg, rgba(13,40,24,.62) 0%, rgba(13,40,24,.42) 45%, rgba(15,53,32,.55) 100%),
+    linear-gradient(to top, rgba(13,40,24,.55), rgba(13,40,24,0) 55%);
+}
 .hero-right-glow {
   position: absolute; pointer-events: none; width: 500px; height: 500px; border-radius: 50%;
   background: radial-gradient(circle, rgba(22,101,52,.4), transparent 70%);
-  top: -80px; right: -80px;
+  top: -80px; right: -80px; z-index: 1;
 }
 .hero-right-glow2 {
   position: absolute; pointer-events: none; width: 300px; height: 300px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(201,168,76,.08), transparent 70%);
-  bottom: -40px; left: -40px;
+  background: radial-gradient(circle, rgba(201,168,76,.12), transparent 70%);
+  bottom: -40px; left: -40px; z-index: 1;
 }
 
 /* ============================================================
@@ -772,11 +789,12 @@ footer { background: #040f07; padding: 64px 0 28px; }
     </div>
   </div>
 
-  <!-- RIGHT: dark green mockup panel -->
+  <!-- RIGHT: real building photo with the app mockup floating over it -->
   <div class="hero-right">
+    <div class="hero-right-photo"></div>
     <div class="hero-right-glow"></div>
     <div class="hero-right-glow2"></div>
-    <div class="iphone reveal">
+    <div class="iphone reveal" style="position:relative;z-index:2;">
       <div class="iphone-screen">
         <div class="dynamic-island"><span class="dynamic-island-camera"></span></div>
         <div class="home-indicator"></div>
