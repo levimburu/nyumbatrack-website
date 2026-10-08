@@ -238,10 +238,9 @@ img { max-width: 100%; display: block; }
 .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
 
 /* RIGHT PANEL — real building photo behind the app mockup.
-   The photo sits in .hero-right-photo; a dark-green gradient overlay keeps
-   the brand mood and makes the floating iPhone readable over any image.
-   If hero-building.jpg is missing, the green background below still shows,
-   so the hero never looks broken in the gap before the photo is added. */
+   Dark-green gradient overlay keeps the brand mood and keeps the iPhone
+   readable. If hero-building.jpg is missing, the green background still
+   shows, so the hero never looks broken. */
 .hero-right {
   background: var(--green-900); display: flex; align-items: center; justify-content: center;
   padding: 80px 48px 80px 40px; position: relative; overflow: hidden;
@@ -252,8 +251,6 @@ img { max-width: 100%; display: block; }
   background-image: url('hero-building.jpg');
   background-size: cover; background-position: center;
 }
-/* Dark-green gradient scrim over the photo — richer at the bottom-left where
-   the phone's shadow falls, lighter top-right so the building stays visible. */
 .hero-right-photo::after {
   content: ""; position: absolute; inset: 0;
   background:
@@ -270,6 +267,64 @@ img { max-width: 100%; display: block; }
   background: radial-gradient(circle, rgba(201,168,76,.12), transparent 70%);
   bottom: -40px; left: -40px; z-index: 1;
 }
+
+/* ---- Properties showcase band (real building photography) ---- */
+.props-section { padding: 100px 0; background: #fff; }
+.props-grid {
+  margin-top: 56px; display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr; grid-template-rows: 1fr 1fr;
+  gap: 18px; height: 560px;
+}
+.props-grid .prop-shot:nth-child(1) { grid-row: span 2; }
+.prop-shot {
+  position: relative; border-radius: var(--radius-lg);
+  overflow: hidden; background: var(--green-900);
+}
+.prop-shot img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+.prop-shot:hover img { transform: scale(1.04); }
+.prop-shot::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(13,40,24,.72) 0%, rgba(13,40,24,0) 45%);
+  pointer-events: none;
+}
+.prop-label { position: absolute; left: 16px; bottom: 14px; z-index: 2; color: #fff; }
+.prop-label .prop-name { font-weight: 700; font-size: .95rem; line-height: 1.2; }
+.prop-label .prop-meta { font-size: .72rem; color: rgba(255,255,255,.75); margin-top: 2px; }
+.prop-label .prop-pill {
+  display: inline-block; margin-bottom: 8px; background: var(--amber); color: #1a1000;
+  font-size: .62rem; font-weight: 700; letter-spacing: .04em; padding: 3px 9px;
+  border-radius: 999px; text-transform: uppercase;
+}
+@media (max-width: 900px) {
+  .props-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; height: auto; }
+  .props-grid .prop-shot:nth-child(1) { grid-row: span 1; grid-column: span 2; aspect-ratio: 16/9; }
+  .prop-shot { aspect-ratio: 4/3; }
+}
+@media (max-width: 560px) {
+  .props-grid { grid-template-columns: 1fr; }
+  .props-grid .prop-shot:nth-child(1) { grid-column: span 1; aspect-ratio: 4/3; }
+}
+
+/* ---- Full-width skyline photo band ---- */
+.skyline-band {
+  position: relative; height: 340px; overflow: hidden;
+  background: var(--green-900) url('skyline-band.jpg') center/cover no-repeat;
+}
+.skyline-band::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(13,40,24,.85) 0%, rgba(13,40,24,.55) 45%, rgba(13,40,24,.72) 100%);
+}
+.skyline-band-inner {
+  position: relative; z-index: 2; height: 100%;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.skyline-band h2 {
+  font-family: 'Playfair Display', serif; color: #fff;
+  font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 900; line-height: 1.15; letter-spacing: -.02em;
+}
+.skyline-band h2 em { font-style: italic; color: var(--amber-light); }
+.skyline-band p { color: rgba(255,255,255,.8); font-size: 1rem; margin-top: 12px; max-width: 480px; }
+@media (max-width: 600px) { .skyline-band { height: 300px; } }
 
 /* ============================================================
    APP MOCKUP (hero right)
@@ -893,6 +948,50 @@ footer { background: #040f07; padding: 64px 0 28px; }
 </div>
 
 <!-- ============================================================
+     PROPERTIES SHOWCASE — real buildings under management
+     ============================================================ -->
+<section class="props-section" id="properties">
+  <div class="wrap">
+    <div class="features-header reveal">
+      <span class="tag tag-green">Real properties, real portfolios</span>
+      <h2 class="section-h">From a single block<br/>to blocks across town.</h2>
+      <p class="section-p" style="max-width:520px;">Apartments, bedsitters, maisonettes, commercial units — whatever you manage, NyumbaTrack keeps every door, tenant and shilling in one place.</p>
+    </div>
+    <div class="props-grid reveal">
+      <div class="prop-shot">
+        <img src="property-1.jpg" alt="Modern high-rise apartment block managed on NyumbaTrack" loading="lazy" />
+        <div class="prop-label">
+          <span class="prop-pill">Featured</span>
+          <div class="prop-name">Kindaruma Apartments</div>
+          <div class="prop-meta">Nairobi, Kilimani · 24 units</div>
+        </div>
+      </div>
+      <div class="prop-shot">
+        <img src="property-2.jpg" alt="Contemporary residential building managed on NyumbaTrack" loading="lazy" />
+        <div class="prop-label">
+          <div class="prop-name">Riverside Court</div>
+          <div class="prop-meta">Mombasa · 12 units</div>
+        </div>
+      </div>
+      <div class="prop-shot">
+        <img src="property-3.jpg" alt="Brick apartment building with balconies managed on NyumbaTrack" loading="lazy" />
+        <div class="prop-label">
+          <div class="prop-name">Greenview Estate</div>
+          <div class="prop-meta">Kisumu · 18 units</div>
+        </div>
+      </div>
+      <div class="prop-shot">
+        <img src="property-4.jpg" alt="Residential apartment tower managed on NyumbaTrack" loading="lazy" />
+        <div class="prop-label">
+          <div class="prop-name">Mwangaza Plaza</div>
+          <div class="prop-meta">Eldoret · 9 units</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
      FEATURES
      ============================================================ -->
 <section class="features-section" id="features">
@@ -1259,6 +1358,18 @@ footer { background: #040f07; padding: 64px 0 28px; }
         <h3>Record rent every month</h3>
         <p>Each month, mark who paid, who paid partially, and who hasn't paid. NyumbaTrack handles the maths, the arrears, and the receipts automatically.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SKYLINE BAND — full-width photo divider
+     ============================================================ -->
+<section class="skyline-band">
+  <div class="wrap skyline-band-inner">
+    <div class="reveal">
+      <h2>Managing property<br/>across <em>the whole country.</em></h2>
+      <p>From a single block in Kitale to portfolios spread across Nairobi, Mombasa and beyond — one system keeps it all in view.</p>
     </div>
   </div>
 </section>
