@@ -287,60 +287,8 @@ img { max-width: 100%; display: block; }
   bottom: -40px; left: -40px; z-index: 1;
 }
 
-/* ---- Hero stage: the phone + floating live-moment chips ----
-   The chips overlap the device edges so the whole thing reads as one
-   living composition. This is where the hero spends its boldness. */
+/* ---- Hero stage: centers the phone within the right panel ---- */
 .hero-stage { position: relative; z-index: 2; display: flex; justify-content: center; }
-.hero-chip {
-  position: absolute; z-index: 3;
-  display: flex; align-items: center; gap: 10px;
-  background: rgba(255,255,255,.96);
-  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-  border: 1px solid rgba(255,255,255,.7);
-  border-radius: 14px; padding: 11px 14px;
-  box-shadow: 0 16px 34px -12px rgba(5,25,15,.55), 0 2px 6px rgba(5,25,15,.14);
-  opacity: 0; will-change: transform, opacity;
-}
-.hero-chip-ic {
-  flex-shrink: 0; width: 30px; height: 30px; border-radius: 9px;
-  display: grid; place-items: center;
-}
-.hero-chip-ic-green { background: linear-gradient(135deg, #16a34a, #0f7a38); }
-.hero-chip-ic-amber { background: linear-gradient(135deg, #d8b45a, #b9922f); }
-.hero-chip-title { font-size: .82rem; font-weight: 700; color: var(--ink); line-height: 1.2; }
-.hero-chip-meta { font-size: .72rem; color: var(--muted); margin-top: 2px; white-space: nowrap; }
-.hero-chip-title { white-space: nowrap; }
-/* Payment chip: top, straddling the phone's upper-left edge. */
-.hero-chip-pay {
-  top: 58px; left: -40px;
-  animation: chipPop .6s cubic-bezier(.2,.9,.25,1) 1.05s forwards,
-             chipFloat 6s ease-in-out 1.75s infinite;
-}
-/* Reminder chip: lower, straddling the phone's lower-right edge. Icon sits
-   on the right (row-reverse) so it overhangs the frame while the text stays
-   legible over the white screen — a diagonal mirror of the payment chip. */
-.hero-chip-remind {
-  flex-direction: row-reverse; text-align: right;
-  bottom: 96px; right: -26px;
-  animation: chipPop .6s cubic-bezier(.2,.9,.25,1) 1.35s forwards,
-             chipFloat 6.6s ease-in-out 2.1s infinite;
-}
-@keyframes chipPop {
-  from { opacity: 0; transform: translateY(14px) scale(.94); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
-}
-@keyframes chipFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
-@media (max-width: 1100px) {
-  .hero-chip-pay { left: -10px; }
-  .hero-chip-remind { right: -14px; }
-}
-/* On phones the chips would crowd the mockup, so hide them and let the
-   device stand on its own. */
-@media (max-width: 560px) { .hero-chip { display: none; } }
-@media (prefers-reduced-motion: reduce) {
-  .hero-chip { animation: chipPop .4s ease forwards; opacity: 1; }
-  .hero-chip-remind { animation-delay: .15s; }
-}
 
 /* ---- Hero left panel enrichment ---- */
 /* Three concrete capability lines give the value prop visual structure
@@ -1036,30 +984,6 @@ footer { background: #040f07; padding: 64px 0 28px; }
           </div>
         </div>
     </div>
-
-      <!-- Floating live-moment chips: product events the static screen
-           doesn't show, so the composition reads as a working app, not a
-           picture. Each pops in after the phone settles, then drifts gently. -->
-      <div class="hero-chip hero-chip-pay">
-        <span class="hero-chip-ic hero-chip-ic-green">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </span>
-        <div class="hero-chip-body">
-          <div class="hero-chip-title">Payment received</div>
-          <div class="hero-chip-meta">Ksh 25,000 · M-Pesa</div>
-        </div>
-      </div>
-
-      <div class="hero-chip hero-chip-remind">
-        <span class="hero-chip-ic hero-chip-ic-amber">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
-        </span>
-        <div class="hero-chip-body">
-          <div class="hero-chip-title">Reminders sent</div>
-          <div class="hero-chip-meta">to 12 tenants · one tap</div>
-        </div>
-      </div>
-
     </div>
   </div>
 
