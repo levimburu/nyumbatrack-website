@@ -325,6 +325,19 @@ img { max-width: 100%; display: block; }
 }
 .prop-shot img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
 .prop-shot:hover img { transform: scale(1.04); }
+/* Featured card is a link to its detail page */
+.prop-shot-link { display: block; cursor: pointer; }
+.prop-view {
+  position: absolute; top: 14px; right: 14px; z-index: 3;
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,.92); color: var(--green-900);
+  padding: 7px 13px; border-radius: 999px;
+  font-size: .78rem; font-weight: 600;
+  box-shadow: 0 4px 14px rgba(5,25,15,.25);
+  opacity: 0; transform: translateY(-4px); transition: opacity .3s, transform .3s;
+}
+.prop-shot-link:hover .prop-view, .prop-shot-link:focus-visible .prop-view { opacity: 1; transform: translateY(0); }
+@media (hover: none) { .prop-view { opacity: 1; transform: none; } }
 .prop-shot::after {
   content: ""; position: absolute; inset: 0;
   background: linear-gradient(to top, rgba(13,40,24,.72) 0%, rgba(13,40,24,0) 45%);
@@ -1023,14 +1036,17 @@ footer { background: #040f07; padding: 64px 0 28px; }
       <p class="section-p" style="max-width:520px;">Apartments, bedsitters, maisonettes, commercial units — whatever you manage, NyumbaTrack keeps every door, tenant and shilling in one place.</p>
     </div>
     <div class="props-grid reveal">
-      <div class="prop-shot">
-        <img src="property-1.jpg" alt="Modern high-rise apartment block managed on NyumbaTrack" loading="lazy" />
+      <a class="prop-shot prop-shot-link" href="kindaruma.html" aria-label="View Kindaruma Apartments">
+        <img src="property-1.jpg" alt="Kindaruma Apartments — modern high-rise in Kilimani, Nairobi" loading="lazy" />
+        <span class="prop-view">View property
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+        </span>
         <div class="prop-label">
           <span class="prop-pill">Featured</span>
           <div class="prop-name">Kindaruma Apartments</div>
           <div class="prop-meta">Nairobi, Kilimani · 24 units</div>
         </div>
-      </div>
+      </a>
       <div class="prop-shot">
         <img src="property-2.jpg" alt="Contemporary residential building managed on NyumbaTrack" loading="lazy" />
         <div class="prop-label">
